@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GarderobLite - Цифровые гардеробные номерки</title>
+    <style>
+        :root {
+            --primary: #96b161;
+            --primary-light: #a8c073;
+            --primary-dark: #849b55;
+            --dark: #000000;
+            --light: #ffffff;
+            --gray: #666666;
+            --gray-light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .phone-link {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .phone-link:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #f9faf8 0%, #f0f2ec 100%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .secondary-button {
+            background-color: white;
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .secondary-button:hover {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        .primary-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .primary-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--gray-light);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            background-color: var(--primary-light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--gray-light);
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+        }
+
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: var(--gray);
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .call-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: var(--primary);
+            padding: 16px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .call-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .step-note {
+            background-color: rgba(150, 177, 97, 0.1);
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-note i {
+            color: var(--primary);
+        }
+
+        .step-note.warning {
+            background-color: rgba(255, 213, 0, 0.1);
+        }
+
+        .step-note.warning i {
+            color: #ffd500;
+        }
+
+        code {
+            background-color: rgba(150, 177, 97, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .video-container iframe {
+                height: 300px;
+            }
+
+            .call-button {
+                font-size: 18px;
+                padding: 14px 24px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Garderob<span>Lite</span></a>
+                <div class="nav-links">
+                    <a href="#features">Возможности</a>
+                    <a href="#how-it-works">Как это работает</a>
+                    <a href="#cta-section">Попробовать</a>
+                </div>
+                <a href="tel:89270418344" class="phone-link">
+                    <i class="fas fa-phone"></i>
+                    8 927 041 83 44
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Цифровые гардеробные номерки для вашего заведения</h1>
+            <p>Современное решение, которое заменит физические номерки на удобные цифровые через чат бот Telegram, делая
+                посещение
+                вашего заведения еще более комфортным.</p>
+            <div class="hero-buttons">
+                <a href="#video" class="secondary-button">Смотреть демо</a>
+                <a href="tel:89270418344" class="primary-button">
+                    <i class="fas fa-phone"></i>
+                    Позвонить нам
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему GarderobLite?</h2>
+                <p>Современный мир требует современных решений для привычных вещей</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i> <!-- Иконка базы данных -->
+                    </div>
+                    <h3>База клиентов для коммуникации</h3>
+                    <p>Получайте контакты всех посетителей и отправляйте им информационные сообщения в Telegram</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Аналитика</h3>
+                    <p>Получайте статистику по посещаемости и загруженности гардероба.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Надежность</h3>
+                    <p>Никаких потерянных номерков. Даже если телефон разрядится, данные сохраняются в системе.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Удобство для клиентов</h3>
+                    <p>Клиентам больше не нужно носить физические номерки - все хранится в их телефоне через Telegram.
+                    </p>
+                </div>
+
+
+
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Простая интеграция</h3>
+                    <p>Легко подключится к вашей текущей системе без сложных настроек.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Наша команда всегда готова помочь с любыми вопросами по работе сервиса.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как это работает?</h2>
+                <p>Простая и безопасная система для клиентов и персонала</p>
+            </div>
+            <div class="steps">
+                <!-- Шаг 1 - Подготовка -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Подготовка гардероба</h3>
+                        <p>Администратор включает систему в личном кабинете и настраивает диапазон электронных номерков.
+                            Физические номерки из этих диапазонов убираются.</p>
+                        <div class="step-note">
+                            <i class="fas fa-info-circle"></i> Статус системы отображается цветом: зелёный - включено,
+                            чёрный - выключено
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 2 - Сдача вещей -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Сдача вещей</h3>
+                        <p>Работник гардероба входит в режим работника гардероба через команду <code>/garderob_on</code>
+                            в
+                            Telegram-боте. Когда клиент нажимает "Я отдал одежду" в боте, работник получает номерок с
+                            кнопкой "Подтвердить номерок".</p>
+                    </div>
+                </div>
+
+                <!-- Шаг 3 - Подтверждение -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Подтверждение приёма</h3>
+                        <p>Работник вешает одежду на указанный номер и нажимает "Подтвердить номерок". Клиент получает
+                            уведомление с номером и временем сдачи.</p>
+                        <div class="step-note">
+                            <i class="fas fa-shield-alt"></i> Это аналогично передаче физического номерка клиенту, но
+                            полностью цифровой процесс
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 4 - Получение вещей -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Получение вещей</h3>
+                        <p>Когда клиент желает забрать одежду, он нажимает на кнопку "Получить одежду" и система
+                            автоматически уведомляет работника. В чат-боте появляется
+                            номерок с кнопкой "Подтвердить и удалить". Работник снимает одежду и передаёт её клиенту,
+                            после чего подтверждает операцию.</p>
+                    </div>
+                </div>
+
+                <!-- Шаг 5 - Завершение работы -->
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Завершение работы</h3>
+                        <p>В конце дня работник выходит из режима командой <code>/garderob_off</code>. Администратор
+                            может перезагрузить систему через личный кабинет (в нерабочее время).</p>
+                        <div class="step-note warning">
+                            <i class="fas fa-exclamation-triangle"></i> При перезагрузке все текущие номерки обнуляются!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta-section">
+        <div class="container">
+            <h2>Готовы попробовать?</h2>
+            <p>Позвоните нам прямо сейчас, чтобы узнать больше о системе и подключить тестовый период</p>
+
+            <a href="tel:89270418344" class="call-button">
+                <i class="fas fa-phone"></i>
+                8 927 041 83 44
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>GarderobLite</h3>
+                    <p>Современное решение для гардероба вашего заведения</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Меню</h3>
+                    <ul>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#how-it-works">Как это работает</a></li>
+                        <li><a href="#video">Демонстрация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="tel:89270418344"><i class="fas fa-phone"></i> 8 927 041 83 44</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GarderobLite. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
